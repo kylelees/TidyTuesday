@@ -1,0 +1,36 @@
+---
+title: "Volcanoes_Github"
+author: '9942433'
+date: "15/05/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+```
+
+```{r}
+Volcanoes <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-05-12/volcano.csv')
+```
+
+```{r}
+Volcanoes_filtered <- filter(Volcanoes, last_eruption_year != 'Unknown')
+```
+
+```{r}
+library(leaflet)
+```
+
+```{r}
+volcanoesMap <- leaflet(Volcanoes) %>%
+  addTiles()
+```
+
+```{r}
+volcanoesMap %>% addCircles(lng = ~longitude, lat = ~latitude, weight = 8, radius = 40, 
+                       color = "#fb3004", stroke = TRUE, fillOpacity = 0.8)
+```

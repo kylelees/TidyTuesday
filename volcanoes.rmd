@@ -1,12 +1,12 @@
 ---
-title: "Volcanoes_Github"
+title: "Interactive volcanic eruptions map"
 knit: (function(input_file, encoding) {
   out_dir <- 'docs';
   rmarkdown::render(input_file,
  encoding=encoding,
  output_file=file.path(dirname(input_file), out_dir, 'index.html'))})
-author: '9942433'
-date: "15/05/2020"
+author: 'Kyle Lees'
+date: ""
 output: html_document
 ---
 
@@ -14,28 +14,26 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-```{r}
+```{r, message = FALSE, warning = FALSE, echo = FALSE}
 library(tidyverse)
 ```
 
-```{r}
-Volcanoes <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-05-12/volcano.csv')
-```
-
-```{r}
-Volcanoes_filtered <- filter(Volcanoes, last_eruption_year != 'Unknown')
-```
-
-```{r}
+```{r, message = FALSE, warning = FALSE, echo = FALSE}
 library(leaflet)
 ```
 
-```{r}
+```{r, message = FALSE, warning = FALSE, echo = FALSE}
+Volcanoes <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-05-12/volcano.csv')
+```
+
+```{r, echo = FALSE}
 volcanoesMap <- leaflet(Volcanoes) %>%
   addTiles()
 ```
 
-```{r}
+Here are the geospatial locations of every volcanic eruption across the globe, which we have just plotted!
+
+```{r, echo = FALSE}
 volcanoesMap %>% addCircles(lng = ~longitude, lat = ~latitude, weight = 8, radius = 40, 
                        color = "#fb3004", stroke = TRUE, fillOpacity = 0.8)
 ```

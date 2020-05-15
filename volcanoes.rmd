@@ -31,6 +31,8 @@ volcanoesMap <- leaflet(Volcanoes) %>%
   addTiles()
 ```
 
+Here is the interactive map plotting all of the volcanic eruptions across the globe!
+
 ```{r, echo = FALSE}
 volcanoesMap %>% addCircles(lng = ~longitude, lat = ~latitude, weight = 8, radius = 40, 
                        color = "#fb3004", stroke = TRUE, fillOpacity = 0.8)
